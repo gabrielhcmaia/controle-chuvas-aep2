@@ -1,0 +1,21 @@
+<header class="barra-navegacao">
+  <a routerLink="/" class="marca">
+    <span class="marca-icone">🌧️</span>
+    <span class="marca-texto">Controle de Chuvas <small>Maringá-PR</small></span>
+  </a>
+  <nav class="links-navegacao">
+    <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+    <a routerLink="/mapa" routerLinkActive="ativo">Mapa</a>
+    <a routerLink="/nova-solicitacao" routerLinkActive="ativo">Nova Solicitação</a>
+    <a routerLink="/perfil" routerLinkActive="ativo">Perfil</a>
+    <a routerLink="/admin" routerLinkActive="ativo">Painel ADM</a>
+  </nav>
+</header>
+
+<main class="conteudo-principal">
+  <router-outlet />
+</main>
+
+<footer class="rodape">
+  Versão Beta — Projeto acadêmico de Engenharia de Software · © {{ anoAtual }}
+</footer>

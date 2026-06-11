@@ -1,0 +1,83 @@
+<section class="pagina">
+  <div class="cabecalho-pagina">
+    <div>
+      <h1>Dashboard de Ocorrências</h1>
+      <p class="subtitulo">Acompanhe as solicitações abertas recentemente em Maringá-PR.</p>
+    </div>
+    <a routerLink="/nova-solicitacao" class="botao botao-primario">+ Nova Solicitação</a>
+  </div>
+
+  @if (carregando) {
+    <p class="aviso">Carregando solicitações...</p>
+  }
+  @if (erroCarregamento) {
+    <p class="alerta-erro">
+      Não foi possível carregar as solicitações. Verifique se a API está em execução em
+      http://localhost:8080.
+    </p>
+  }
+
+  <div class="layout-dashboard">
+    <div>
+      <h2>Solicitações recentes</h2>
+      <div class="grade-cards">
+        @for (solicitacao of solicitacoesRecentes; track solicitacao.id) {
+          <article class="cartao cartao-solicitacao">
+            <div class="icone-categoria">{{ iconesCategoria[solicitacao.categoria] }}</div>
+            <div class="dados-solicitacao">
+              <h3>{{ rotulosCategoria[solicitacao.categoria] }}</h3>
+              <p class="endereco">📍 {{ solicitacao.endereco }}</p>
+              <p class="data">{{ solicitacao.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
+              <span [class]="classeDoBadge(solicitacao.status)">
+                {{ rotulosStatus[solicitacao.status] }}
+              </span>
+            </div>
+            <a class="botao botao-secundario" [routerLink]="['/admin', solicitacao.id]">Detalhes</a>
+          </article>
+        } @empty {
+          @if (!carregando && !erroCarregamento) {
+            <p class="aviso">Nenhuma solicitação registrada até o momento.</p>
+          }
+        }
+      </div>
+    </div>
+
+    <aside class="cartao painel-informacoes">
+      <h2>Informações úteis</h2>
+
+      <div class="bloco-informacao">
+        <span class="rotulo-informacao">Previsão do tempo</span>
+        <span class="valor-informacao">🌧️ {{ previsaoTempo }}</span>
+      </div>
+
+      <div class="bloco-informacao">
+        <span class="rotulo-informacao">Região mais afetada</span>
+        <span class="valor-informacao">{{ regiaoMaisAfetada }}</span>
+      </div>
+
+      <div class="bloco-informacao">
+        <span class="rotulo-informacao">Ruas afetadas</span>
+        <ul class="lista-ruas">
+          @for (rua of ruasAfetadas; track rua) {
+            <li>{{ rua }}</li>
+          }
+        </ul>
+      </div>
+
+      <div class="contadores">
+        <div class="contador">
+          <strong>{{ totalPendentes }}</strong>
+          <span>Pendentes</span>
+        </div>
+        <div class="contador">
+          <strong>{{ totalEncaminhadas }}</strong>
+          <span>Encaminhadas</span>
+        </div>
+        <div class="contador">
+          <strong>{{ totalConcluidas }}</strong>
+          <span>Concluídas</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

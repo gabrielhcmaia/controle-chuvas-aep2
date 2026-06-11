@@ -1,0 +1,61 @@
+<section class="pagina">
+  <div class="cabecalho-pagina">
+    <div>
+      <h1>Mapa de Ocorrências</h1>
+      <p class="subtitulo">Visualização simulada dos incidentes ativos em Maringá-PR.</p>
+    </div>
+  </div>
+
+  @if (erroCarregamento) {
+    <p class="alerta-erro">
+      Não foi possível carregar as ocorrências. Verifique se a API está em execução.
+    </p>
+  }
+
+  <div class="cartao cartao-mapa">
+    <div class="mapa-simulado" role="img" aria-label="Mapa simulado de Maringá com marcadores de incidentes">
+      <span class="rotulo-mapa" style="left: 12%; top: 18%;">Zona 01</span>
+      <span class="rotulo-mapa" style="left: 70%; top: 14%;">Zona 05</span>
+      <span class="rotulo-mapa" style="left: 28%; top: 64%;">Zona 07</span>
+      <span class="rotulo-mapa" style="left: 76%; top: 70%;">Vila Morangueira</span>
+      <span class="rotulo-mapa rotulo-parque" style="left: 46%; top: 42%;">Parque do Ingá</span>
+
+      @for (marcador of marcadores; track marcador.solicitacao.id) {
+        <span
+          class="marcador"
+          [style.left]="marcador.esquerda"
+          [style.top]="marcador.topo"
+          [title]="rotulosCategoria[marcador.solicitacao.categoria] + ' — ' + marcador.solicitacao.endereco">
+          {{ marcador.icone }}
+        </span>
+      }
+    </div>
+
+    <div class="legenda-mapa">
+      <span>🌊 Alagamento</span>
+      <span>🚧 Trânsito</span>
+      <span>🌳 Árvore caída</span>
+      <span>🚨 Acidente</span>
+      <span>⚡ Queda de energia</span>
+    </div>
+  </div>
+
+  <div class="cartao painel-alertas">
+    <h2>🔔 Alertas rápidos por bairro</h2>
+    @if (carregando) {
+      <p class="aviso">Carregando alertas...</p>
+    }
+    <ul class="lista-alertas">
+      @for (alerta of alertas; track alerta.mensagem) {
+        <li>
+          <span class="icone-alerta">{{ alerta.icone }}</span>
+          <span><strong>{{ alerta.bairro }}:</strong> {{ alerta.mensagem }}</span>
+        </li>
+      } @empty {
+        @if (!carregando) {
+          <li class="aviso">Nenhum alerta ativo no momento.</li>
+        }
+      }
+    </ul>
+  </div>
+</section>

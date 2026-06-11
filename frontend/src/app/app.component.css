@@ -1,0 +1,72 @@
+.barra-navegacao {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(90deg, var(--cor-primaria-escura), var(--cor-primaria));
+  box-shadow: 0 2px 8px rgba(13, 71, 161, 0.35);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.marca-icone {
+  font-size: 1.5rem;
+}
+
+.marca-texto small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+.links-navegacao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.links-navegacao a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.links-navegacao a:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.links-navegacao a.ativo {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 600;
+}
+
+.conteudo-principal {
+  min-height: calc(100vh - 120px);
+  padding: 1.5rem;
+}
+
+.rodape {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}

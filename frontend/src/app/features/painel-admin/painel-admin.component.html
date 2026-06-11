@@ -1,0 +1,119 @@
+<section class="pagina">
+  <div class="cabecalho-pagina">
+    <div>
+      <h1>Painel Administrativo</h1>
+      <p class="subtitulo">
+        Acesso restrito ao Servidor Público — triagem e encaminhamento de solicitações.
+      </p>
+    </div>
+  </div>
+
+  @if (mensagemFeedback) {
+    <div [class]="feedbackErro ? 'alerta-erro' : 'alerta-sucesso'">{{ mensagemFeedback }}</div>
+  }
+
+  <div class="layout-admin">
+    <div class="cartao lista-solicitacoes">
+      <h2>Solicitações</h2>
+      @if (carregando) {
+        <p class="aviso">Carregando...</p>
+      }
+      <ul>
+        @for (solicitacao of solicitacoes; track solicitacao.id) {
+          <li
+            class="item-solicitacao"
+            [class.selecionado]="solicitacao.id === selecionada?.id"
+            (click)="selecionar(solicitacao)"
+            (keydown.enter)="selecionar(solicitacao)"
+            tabindex="0">
+            <span class="icone-item">{{ iconesCategoria[solicitacao.categoria] }}</span>
+            <span class="resumo-item">
+              <strong>#{{ solicitacao.id }} — {{ rotulosCategoria[solicitacao.categoria] }}</strong>
+              <small>{{ solicitacao.endereco }}</small>
+            </span>
+            <span [class]="classeDoBadge(solicitacao.status)">
+              {{ rotulosStatus[solicitacao.status] }}
+            </span>
+          </li>
+        } @empty {
+          @if (!carregando) {
+            <li class="aviso">Nenhuma solicitação registrada.</li>
+          }
+        }
+      </ul>
+    </div>
+
+    <div class="cartao detalhe-solicitacao">
+      @if (selecionada; as solicitacao) {
+        <div class="cabecalho-detalhe">
+          <h2>Solicitação #{{ solicitacao.id }}</h2>
+          <span [class]="classeDoBadge(solicitacao.status)">
+            {{ rotulosStatus[solicitacao.status] }}
+          </span>
+        </div>
+
+        <dl class="dados-detalhe">
+          <div class="linha-detalhe">
+            <dt>Solicitante</dt>
+            <dd>{{ solicitacao.nomeSolicitante }}</dd>
+          </div>
+          <div class="linha-detalhe">
+            <dt>RG / CPF</dt>
+            <dd>{{ solicitacao.rg }} · {{ solicitacao.cpf }}</dd>
+          </div>
+          <div class="linha-detalhe">
+            <dt>Endereço</dt>
+            <dd>{{ solicitacao.endereco }}</dd>
+          </div>
+          <div class="linha-detalhe">
+            <dt>Categoria</dt>
+            <dd>
+              {{ iconesCategoria[solicitacao.categoria] }}
+              {{ rotulosCategoria[solicitacao.categoria] }}
+            </dd>
+          </div>
+          <div class="linha-detalhe">
+            <dt>Abertura</dt>
+            <dd>{{ solicitacao.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</dd>
+          </div>
+          <div class="linha-detalhe descricao">
+            <dt>Descrição</dt>
+            <dd>{{ solicitacao.descricao }}</dd>
+          </div>
+        </dl>
+
+        <div class="acoes-admin">
+          <button
+            type="button"
+            class="botao botao-sucesso"
+            [disabled]="!acoesDisponiveis || atualizando"
+            (click)="concluir()">
+            CONCLUIR
+          </button>
+          <button
+            type="button"
+            class="botao botao-primario"
+            [disabled]="!podeEncaminhar || atualizando"
+            (click)="encaminhar()">
+            ENCAMINHAR
+          </button>
+          <button
+            type="button"
+            class="botao botao-perigo"
+            [disabled]="!acoesDisponiveis || atualizando"
+            (click)="cancelar()">
+            CANCELAR
+          </button>
+        </div>
+
+        @if (!acoesDisponiveis) {
+          <p class="aviso aviso-encerrada">
+            Esta solicitação está encerrada e não aceita novas ações.
+          </p>
+        }
+      } @else {
+        <p class="aviso">Selecione uma solicitação na lista para visualizar os detalhes.</p>
+      }
+    </div>
+  </div>
+</section>

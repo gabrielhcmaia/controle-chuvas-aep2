@@ -1,0 +1,77 @@
+<section class="pagina pagina-formulario">
+  <div class="cabecalho-pagina">
+    <div>
+      <h1>Nova Solicitação</h1>
+      <p class="subtitulo">Informe os dados da ocorrência para acionar a equipe responsável.</p>
+    </div>
+  </div>
+
+  @if (mensagemSucesso) {
+  <div class="alerta-sucesso">
+    {{ mensagemSucesso }}
+    <a routerLink="/" class="link-sucesso">Voltar ao dashboard</a>
+  </div>
+  }
+  @if (mensagemErro) {
+  <div class="alerta-erro">{{ mensagemErro }}</div>
+  }
+
+  <form class="cartao" [formGroup]="formulario" (ngSubmit)="enviar()">
+    <div class="campo" [class.invalido]="campoInvalido('nomeSolicitante')">
+      <label for="nomeSolicitante">Nome do solicitante</label>
+      <input id="nomeSolicitante" type="text" formControlName="nomeSolicitante" placeholder="Digite seu nome completo">
+      @if (campoInvalido('nomeSolicitante')) {
+      <small class="erro">Informe um nome com pelo menos 3 caracteres.</small>
+      }
+      <button type="button" class="botao-link" (click)="usarNomeDoPerfil()">
+        Usar dados do perfil
+      </button>
+    </div>
+
+    <div class="linha-dupla">
+      <div class="campo">
+        <label for="rg">RG (do perfil)</label>
+        <input id="rg" type="text" [value]="perfil.rg" readonly>
+      </div>
+      <div class="campo">
+        <label for="cpf">CPF (do perfil)</label>
+        <input id="cpf" type="text" [value]="perfil.cpf" readonly>
+      </div>
+    </div>
+
+    <div class="campo" [class.invalido]="campoInvalido('endereco')">
+      <label for="endereco">Local da ocorrência</label>
+      <input id="endereco" type="text" formControlName="endereco"
+        placeholder="Rua, número e bairro (ex.: Av. Brasil, 1200 - Zona 01)">
+      @if (campoInvalido('endereco')) {
+      <small class="erro">Informe o endereço completo da ocorrência.</small>
+      }
+    </div>
+
+    <div class="campo" [class.invalido]="campoInvalido('categoria')">
+      <label for="categoria">Categoria do incidente</label>
+      <select id="categoria" formControlName="categoria">
+        <option value="" disabled>Selecione uma categoria</option>
+        @for (categoria of categorias; track categoria) {
+        <option [value]="categoria">{{ rotulosCategoria[categoria] }}</option>
+        }
+      </select>
+      @if (campoInvalido('categoria')) {
+      <small class="erro">Selecione a categoria do incidente.</small>
+      }
+    </div>
+
+    <div class="campo" [class.invalido]="campoInvalido('descricao')">
+      <label for="descricao">Descrição detalhada</label>
+      <textarea id="descricao" rows="5" formControlName="descricao"
+        placeholder="Descreva a situação com detalhes (mínimo de 10 caracteres)"></textarea>
+      @if (campoInvalido('descricao')) {
+      <small class="erro">Descreva a ocorrência com pelo menos 10 caracteres.</small>
+      }
+    </div>
+
+    <button type="submit" class="botao botao-primario botao-enviar" [disabled]="enviando">
+      {{ enviando ? 'Enviando...' : 'Enviar solicitação' }}
+    </button>
+  </form>
+</section>

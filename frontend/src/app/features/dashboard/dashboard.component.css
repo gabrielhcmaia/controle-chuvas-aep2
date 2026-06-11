@@ -1,0 +1,105 @@
+.layout-dashboard {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.grade-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.cartao-solicitacao {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.icone-categoria {
+  font-size: 2rem;
+}
+
+.dados-solicitacao h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.dados-solicitacao .endereco {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.dados-solicitacao .data {
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
+  color: var(--cor-texto-suave);
+}
+
+.painel-informacoes {
+  position: sticky;
+  top: 80px;
+}
+
+.bloco-informacao {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.rotulo-informacao {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-suave);
+}
+
+.valor-informacao {
+  font-weight: 600;
+}
+
+.lista-ruas {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+}
+
+.contadores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.contador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--cor-fundo);
+  border-radius: 8px;
+  padding: 0.6rem 0.3rem;
+}
+
+.contador strong {
+  font-size: 1.3rem;
+  color: var(--cor-primaria);
+}
+
+.contador span {
+  font-size: 0.7rem;
+  color: var(--cor-texto-suave);
+}
+
+@media (max-width: 860px) {
+  .layout-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .painel-informacoes {
+    position: static;
+  }
+}
