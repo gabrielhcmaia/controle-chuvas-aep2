@@ -1,21 +1,43 @@
-<header class="barra-navegacao">
-  <a routerLink="/" class="marca">
-    <span class="marca-icone">🌧️</span>
-    <span class="marca-texto">Controle de Chuvas <small>Maringá-PR</small></span>
-  </a>
-  <nav class="links-navegacao">
-    <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
-    <a routerLink="/mapa" routerLinkActive="ativo">Mapa</a>
-    <a routerLink="/nova-solicitacao" routerLinkActive="ativo">Nova Solicitação</a>
-    <a routerLink="/perfil" routerLinkActive="ativo">Perfil</a>
-    <a routerLink="/admin" routerLinkActive="ativo">Painel ADM</a>
+<div class="moldura-celular">
+  <main class="tela-aplicativo">
+    <router-outlet />
+    <p class="rodape">Versão Beta — Projeto acadêmico de Engenharia de Software · © {{ anoAtual }}</p>
+  </main>
+
+  <nav class="navegacao-inferior" aria-label="Navegação principal">
+    <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{ exact: true }"
+      aria-label="Dashboard" title="Dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="8" height="8" rx="2" />
+        <rect x="13" y="3" width="8" height="8" rx="2" />
+        <rect x="3" y="13" width="8" height="8" rx="2" />
+        <rect x="13" y="13" width="8" height="8" rx="2" />
+      </svg>
+    </a>
+    <a routerLink="/mapa" routerLinkActive="ativo" aria-label="Busca e mapa" title="Busca e mapa">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <line x1="16.5" y1="16.5" x2="21" y2="21" />
+      </svg>
+    </a>
+    <a routerLink="/nova-solicitacao" routerLinkActive="ativo" aria-label="Alerta — nova solicitação"
+      title="Alerta — nova solicitação">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+        <line x1="12" y1="9" x2="12" y2="13" />
+        <circle cx="12" cy="16.6" r="0.6" fill="currentColor" />
+      </svg>
+    </a>
+    <a routerLink="/perfil" routerLinkActive="ativo" aria-label="Localização e perfil"
+      title="Localização e perfil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    </a>
   </nav>
-</header>
-
-<main class="conteudo-principal">
-  <router-outlet />
-</main>
-
-<footer class="rodape">
-  Versão Beta — Projeto acadêmico de Engenharia de Software · © {{ anoAtual }}
-</footer>
+</div>

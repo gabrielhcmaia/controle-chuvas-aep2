@@ -1,11 +1,17 @@
-<section class="pagina">
-  <div class="cabecalho-pagina">
-    <div>
-      <h1>Dashboard de Ocorrências</h1>
-      <p class="subtitulo">Acompanhe as solicitações abertas recentemente em Maringá-PR.</p>
-    </div>
-    <a routerLink="/nova-solicitacao" class="botao botao-primario">+ Nova Solicitação</a>
-  </div>
+<section class="tela-dashboard">
+  <header class="topo-tela">
+    <details class="menu-hamburguer">
+      <summary aria-label="Abrir menu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </summary>
+      <nav class="itens-menu">
+        <a routerLink="/perfil">Perfil do usuário</a>
+        <a routerLink="/admin">Painel ADM</a>
+      </nav>
+    </details>
+  </header>
 
   @if (carregando) {
     <p class="aviso">Carregando solicitações...</p>
@@ -17,67 +23,34 @@
     </p>
   }
 
-  <div class="layout-dashboard">
-    <div>
-      <h2>Solicitações recentes</h2>
-      <div class="grade-cards">
-        @for (solicitacao of solicitacoesRecentes; track solicitacao.id) {
-          <article class="cartao cartao-solicitacao">
-            <div class="icone-categoria">{{ iconesCategoria[solicitacao.categoria] }}</div>
-            <div class="dados-solicitacao">
-              <h3>{{ rotulosCategoria[solicitacao.categoria] }}</h3>
-              <p class="endereco">📍 {{ solicitacao.endereco }}</p>
-              <p class="data">{{ solicitacao.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
-              <span [class]="classeDoBadge(solicitacao.status)">
-                {{ rotulosStatus[solicitacao.status] }}
-              </span>
-            </div>
-            <a class="botao botao-secundario" [routerLink]="['/admin', solicitacao.id]">Detalhes</a>
-          </article>
-        } @empty {
-          @if (!carregando && !erroCarregamento) {
-            <p class="aviso">Nenhuma solicitação registrada até o momento.</p>
-          }
-        }
-      </div>
-    </div>
-
-    <aside class="cartao painel-informacoes">
-      <h2>Informações úteis</h2>
-
-      <div class="bloco-informacao">
-        <span class="rotulo-informacao">Previsão do tempo</span>
-        <span class="valor-informacao">🌧️ {{ previsaoTempo }}</span>
-      </div>
-
-      <div class="bloco-informacao">
-        <span class="rotulo-informacao">Região mais afetada</span>
-        <span class="valor-informacao">{{ regiaoMaisAfetada }}</span>
-      </div>
-
-      <div class="bloco-informacao">
-        <span class="rotulo-informacao">Ruas afetadas</span>
-        <ul class="lista-ruas">
-          @for (rua of ruasAfetadas; track rua) {
-            <li>{{ rua }}</li>
-          }
-        </ul>
-      </div>
-
-      <div class="contadores">
-        <div class="contador">
-          <strong>{{ totalPendentes }}</strong>
-          <span>Pendentes</span>
+  <div class="grade-cards">
+    @for (solicitacao of solicitacoesRecentes; track solicitacao.id) {
+      <article class="cartao mini-card">
+        <div class="topo-card">
+          <span class="icone-categoria" aria-hidden="true">{{ iconesCategoria[solicitacao.categoria] }}</span>
+          <span class="quadro-imagem" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="3" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <path d="M21 15.5 16 10.5 5 21" />
+            </svg>
+          </span>
         </div>
-        <div class="contador">
-          <strong>{{ totalEncaminhadas }}</strong>
-          <span>Encaminhadas</span>
-        </div>
-        <div class="contador">
-          <strong>{{ totalConcluidas }}</strong>
-          <span>Concluídas</span>
-        </div>
-      </div>
-    </aside>
+        <h3 class="titulo-card">{{ rotulosCategoria[solicitacao.categoria] }}</h3>
+        <p class="rua-card">{{ solicitacao.endereco }}</p>
+        <a class="botao botao-detalhes" [routerLink]="['/admin', solicitacao.id]">detalhes</a>
+      </article>
+    } @empty {
+      @if (!carregando && !erroCarregamento) {
+        <p class="aviso">Nenhuma solicitação registrada até o momento.</p>
+      }
+    }
   </div>
+
+  <aside class="cartao card-resumo">
+    <p><strong>Região mais afetada:</strong> {{ regiaoMaisAfetada }}</p>
+    <p><strong>Ruas próximas afetadas:</strong> {{ ruasAfetadas.join(', ') }}</p>
+    <p><strong>Tempo de chuva previsto:</strong> 16:00 - 18:00</p>
+  </aside>
 </section>

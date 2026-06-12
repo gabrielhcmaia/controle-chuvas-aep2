@@ -1,76 +1,76 @@
-<section class="pagina pagina-perfil">
-  <div class="cabecalho-pagina">
-    <div>
-      <h1>Perfil do Usuário</h1>
-      <p class="subtitulo">Dados utilizados para preencher automaticamente suas solicitações.</p>
-    </div>
+<section class="tela-perfil">
+  <div class="area-avatar">
+    <div class="avatar" aria-hidden="true">{{ iniciais }}</div>
+    @if (!editando) {
+      <button type="button" class="botao-editar" aria-label="Editar dados do perfil" (click)="iniciarEdicao()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z" />
+        </svg>
+      </button>
+    }
   </div>
 
-  <div class="layout-perfil">
-    <div class="cartao cartao-perfil">
-      <div class="avatar" aria-hidden="true">{{ iniciais }}</div>
-      <h2 class="nome-usuario">{{ perfil.nome }}</h2>
-      <p class="profissao">{{ perfil.profissao }}</p>
+  <h1 class="nome-usuario">{{ perfil.nome }}</h1>
 
-      @if (!editando) {
-        <dl class="dados-formais">
-          <div class="linha-dado">
-            <dt>RG</dt>
-            <dd>{{ perfil.rg }}</dd>
-          </div>
-          <div class="linha-dado">
-            <dt>CPF</dt>
-            <dd>{{ perfil.cpf }}</dd>
-          </div>
-          <div class="linha-dado">
-            <dt>Endereço</dt>
-            <dd>{{ perfil.endereco }}</dd>
-          </div>
-          <div class="linha-dado">
-            <dt>Profissão</dt>
-            <dd>{{ perfil.profissao }}</dd>
-          </div>
-        </dl>
-        <button type="button" class="botao botao-primario" (click)="iniciarEdicao()">
-          ✏️ Editar dados
+  @if (!editando) {
+    <div class="linha-perfil">
+      <dl class="bloco-dados">
+        <div class="dado">
+          <dt>RG:</dt>
+          <dd>{{ perfil.rg }}</dd>
+        </div>
+        <div class="dado">
+          <dt>CPF:</dt>
+          <dd>{{ perfil.cpf }}</dd>
+        </div>
+        <div class="dado">
+          <dt>Endereço:</dt>
+          <dd>{{ perfil.endereco }}</dd>
+        </div>
+        <div class="dado">
+          <dt>Profissão:</dt>
+          <dd>{{ perfil.profissao }}</dd>
+        </div>
+      </dl>
+
+      <div class="area-distintivo">
+        <div class="losango">
+          <span class="numero-losango">{{ totalSolicitacoes }}</span>
+        </div>
+        <span class="rotulo-losango">Solicitações</span>
+      </div>
+    </div>
+  } @else {
+    <form class="formulario-edicao" [formGroup]="formularioEdicao" (ngSubmit)="salvarEdicao()">
+      <div class="campo">
+        <label for="nome">Nome</label>
+        <input id="nome" type="text" formControlName="nome">
+      </div>
+      <div class="campo">
+        <label for="rg">RG</label>
+        <input id="rg" type="text" formControlName="rg">
+      </div>
+      <div class="campo">
+        <label for="cpf">CPF</label>
+        <input id="cpf" type="text" formControlName="cpf">
+      </div>
+      <div class="campo">
+        <label for="endereco">Endereço</label>
+        <input id="endereco" type="text" formControlName="endereco">
+      </div>
+      <div class="campo">
+        <label for="profissao">Profissão</label>
+        <input id="profissao" type="text" formControlName="profissao">
+      </div>
+      <div class="acoes-edicao">
+        <button type="submit" class="botao botao-sucesso" [disabled]="formularioEdicao.invalid">
+          Salvar
         </button>
-      } @else {
-        <form class="formulario-edicao" [formGroup]="formularioEdicao" (ngSubmit)="salvarEdicao()">
-          <div class="campo">
-            <label for="nome">Nome</label>
-            <input id="nome" type="text" formControlName="nome">
-          </div>
-          <div class="campo">
-            <label for="rg">RG</label>
-            <input id="rg" type="text" formControlName="rg">
-          </div>
-          <div class="campo">
-            <label for="cpf">CPF</label>
-            <input id="cpf" type="text" formControlName="cpf">
-          </div>
-          <div class="campo">
-            <label for="endereco">Endereço</label>
-            <input id="endereco" type="text" formControlName="endereco">
-          </div>
-          <div class="campo">
-            <label for="profissao">Profissão</label>
-            <input id="profissao" type="text" formControlName="profissao">
-          </div>
-          <div class="acoes-edicao">
-            <button type="submit" class="botao botao-sucesso" [disabled]="formularioEdicao.invalid">
-              Salvar
-            </button>
-            <button type="button" class="botao botao-secundario" (click)="cancelarEdicao()">
-              Cancelar
-            </button>
-          </div>
-        </form>
-      }
-    </div>
-
-    <aside class="cartao contador-solicitacoes">
-      <span class="numero-destaque">{{ totalSolicitacoes }}</span>
-      <span class="legenda-contador">solicitações realizadas por você</span>
-    </aside>
-  </div>
+        <button type="button" class="botao botao-secundario" (click)="cancelarEdicao()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  }
 </section>

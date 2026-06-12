@@ -1,9 +1,25 @@
-<section class="pagina">
-  <div class="cabecalho-pagina">
-    <div>
-      <h1>Mapa de Ocorrências</h1>
-      <p class="subtitulo">Visualização simulada dos incidentes ativos em Maringá-PR.</p>
-    </div>
+<section class="tela-mapa">
+  <header class="cabecalho-clima">
+    <span>Maringá-PR - 20:30 - Chuvoso</span>
+    <span class="icone-clima" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.3 8.4" />
+        <path d="M8 15.5v3" />
+        <path d="M12 17v3" />
+        <path d="M16 15.5v3" />
+      </svg>
+    </span>
+  </header>
+
+  <div class="busca-endereco">
+    <span class="icone-lupa" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7" />
+        <line x1="16.5" y1="16.5" x2="21" y2="21" />
+      </svg>
+    </span>
+    <input type="text" placeholder="Endereço..." aria-label="Buscar endereço">
   </div>
 
   @if (erroCarregamento) {
@@ -12,45 +28,38 @@
     </p>
   }
 
-  <div class="cartao cartao-mapa">
-    <div class="mapa-simulado" role="img" aria-label="Mapa simulado de Maringá com marcadores de incidentes">
-      <span class="rotulo-mapa" style="left: 12%; top: 18%;">Zona 01</span>
-      <span class="rotulo-mapa" style="left: 70%; top: 14%;">Zona 05</span>
-      <span class="rotulo-mapa" style="left: 28%; top: 64%;">Zona 07</span>
-      <span class="rotulo-mapa" style="left: 76%; top: 70%;">Vila Morangueira</span>
-      <span class="rotulo-mapa rotulo-parque" style="left: 46%; top: 42%;">Parque do Ingá</span>
+  <div class="map-box" role="img" aria-label="Mapa simulado de Maringá com marcadores de incidentes">
+    <span class="rotulo-mapa" style="left: 12%; top: 18%;">Zona 01</span>
+    <span class="rotulo-mapa" style="left: 70%; top: 14%;">Zona 05</span>
+    <span class="rotulo-mapa" style="left: 28%; top: 64%;">Zona 07</span>
+    <span class="rotulo-mapa" style="left: 76%; top: 70%;">Vila Morangueira</span>
+    <span class="rotulo-mapa rotulo-parque" style="left: 46%; top: 42%;">Parque do Ingá</span>
 
-      @for (marcador of marcadores; track marcador.solicitacao.id) {
-        <span
-          class="marcador"
-          [style.left]="marcador.esquerda"
-          [style.top]="marcador.topo"
-          [title]="rotulosCategoria[marcador.solicitacao.categoria] + ' — ' + marcador.solicitacao.endereco">
-          {{ marcador.icone }}
-        </span>
-      }
-    </div>
+    @for (marcador of marcadores; track marcador.solicitacao.id) {
+      <span
+        class="marcador"
+        [style.left]="marcador.esquerda"
+        [style.top]="marcador.topo"
+        [title]="rotulosCategoria[marcador.solicitacao.categoria] + ' — ' + marcador.solicitacao.endereco">
+        {{ marcador.icone }}
+      </span>
+    }
 
-    <div class="legenda-mapa">
-      <span>🌊 Alagamento</span>
-      <span>🚧 Trânsito</span>
-      <span>🌳 Árvore caída</span>
-      <span>🚨 Acidente</span>
-      <span>⚡ Queda de energia</span>
-    </div>
+    <span class="pino-central" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" fill="#16222e" />
+        <circle cx="12" cy="10" r="3" fill="#fff" />
+      </svg>
+    </span>
   </div>
 
-  <div class="cartao painel-alertas">
-    <h2>🔔 Alertas rápidos por bairro</h2>
+  <div class="painel-alertas">
     @if (carregando) {
       <p class="aviso">Carregando alertas...</p>
     }
     <ul class="lista-alertas">
       @for (alerta of alertas; track alerta.mensagem) {
-        <li>
-          <span class="icone-alerta">{{ alerta.icone }}</span>
-          <span><strong>{{ alerta.bairro }}:</strong> {{ alerta.mensagem }}</span>
-        </li>
+        <li>- <strong>{{ alerta.bairro }}:</strong> {{ alerta.mensagem }}</li>
       } @empty {
         @if (!carregando) {
           <li class="aviso">Nenhum alerta ativo no momento.</li>

@@ -1,105 +1,90 @@
-.layout-dashboard {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1.25rem;
-  align-items: start;
+.topo-tela {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .grade-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
 }
 
-.cartao-solicitacao {
+.grade-cards .aviso {
+  grid-column: 1 / -1;
+}
+
+.mini-card {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.7rem 0.75rem;
+}
+
+.topo-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .icone-categoria {
-  font-size: 2rem;
+  font-size: 1.45rem;
+  line-height: 1;
 }
 
-.dados-solicitacao h3 {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.dados-solicitacao .endereco {
-  margin: 0.25rem 0;
-  font-size: 0.85rem;
-  color: var(--cor-texto-suave);
-}
-
-.dados-solicitacao .data {
-  margin: 0 0 0.4rem;
-  font-size: 0.75rem;
-  color: var(--cor-texto-suave);
-}
-
-.painel-informacoes {
-  position: sticky;
-  top: 80px;
-}
-
-.bloco-informacao {
+.quadro-imagem {
+  width: 32px;
+  height: 32px;
   display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--cor-borda);
-}
-
-.rotulo-informacao {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--cor-texto-suave);
-}
-
-.valor-informacao {
-  font-weight: 600;
-}
-
-.lista-ruas {
-  margin: 0;
-  padding-left: 1.1rem;
-  font-size: 0.9rem;
-}
-
-.contadores {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.contador {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  background-color: var(--cor-fundo);
+  justify-content: center;
+  background-color: #e8edf4;
   border-radius: 8px;
-  padding: 0.6rem 0.3rem;
-}
-
-.contador strong {
-  font-size: 1.3rem;
-  color: var(--cor-primaria);
-}
-
-.contador span {
-  font-size: 0.7rem;
   color: var(--cor-texto-suave);
 }
 
-@media (max-width: 860px) {
-  .layout-dashboard {
-    grid-template-columns: 1fr;
-  }
+.quadro-imagem svg {
+  width: 18px;
+  height: 18px;
+}
 
-  .painel-informacoes {
-    position: static;
+.titulo-card {
+  margin: 0.45rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+
+.rua-card {
+  margin: 0.1rem 0 0.5rem;
+  font-size: 0.76rem;
+  color: var(--cor-texto-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.botao-detalhes {
+  align-self: flex-end;
+  margin-top: auto;
+  background-color: #fff;
+  border: 2px solid var(--cor-contorno);
+  color: var(--cor-texto);
+  padding: 0.2rem 0.85rem;
+  font-size: 0.76rem;
+}
+
+.card-resumo {
+  margin-top: 1rem;
+  padding: 1.1rem 1rem;
+}
+
+.card-resumo p {
+  margin: 0.4rem 0;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 360px) {
+  .grade-cards {
+    grid-template-columns: 1fr;
   }
 }

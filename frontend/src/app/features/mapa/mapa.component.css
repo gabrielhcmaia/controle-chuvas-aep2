@@ -1,12 +1,65 @@
-.cartao-mapa {
-  padding: 0.75rem;
-  margin-bottom: 1.25rem;
+.tela-mapa {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
-.mapa-simulado {
+.cabecalho-clima {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.icone-clima svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.busca-endereco {
   position: relative;
-  height: 400px;
-  border-radius: 10px;
+  margin-bottom: 0.9rem;
+}
+
+.busca-endereco input {
+  width: 100%;
+  font: inherit;
+  border: var(--borda-nitida);
+  border-radius: var(--raio-pilula);
+  padding: 0.6rem 1rem 0.6rem 2.6rem;
+  background-color: #fff;
+  color: var(--cor-texto);
+}
+
+.busca-endereco input:focus {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 1px;
+}
+
+.icone-lupa {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  color: var(--cor-texto);
+}
+
+.icone-lupa svg {
+  width: 18px;
+  height: 18px;
+}
+
+.map-box {
+  position: relative;
+  flex: 1;
+  min-height: 280px;
+  border: var(--borda-nitida);
+  border-radius: var(--raio-cartao);
   overflow: hidden;
   background-color: #dde9d3;
   background-image:
@@ -51,38 +104,40 @@
   }
 }
 
-.legenda-mapa {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  padding: 0.7rem 0.5rem 0.2rem;
-  font-size: 0.8rem;
-  color: var(--cor-texto-suave);
+.pino-central {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -100%);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
 }
 
-.painel-alertas h2 {
-  margin-bottom: 0.5rem;
+.pino-central svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+}
+
+.painel-alertas {
+  margin-top: 0.9rem;
+  background-color: #fff;
+  border: var(--borda-nitida);
+  border-radius: var(--raio-cartao);
+  padding: 0.75rem 1rem;
+}
+
+.painel-alertas .aviso {
+  margin: 0 0 0.3rem;
 }
 
 .lista-alertas {
   list-style: none;
   margin: 0;
   padding: 0;
+  font-size: 0.88rem;
 }
 
 .lista-alertas li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  padding: 0.6rem 0.2rem;
-  border-bottom: 1px solid var(--cor-borda);
-  font-size: 0.9rem;
-}
-
-.lista-alertas li:last-child {
-  border-bottom: none;
-}
-
-.icone-alerta {
-  font-size: 1.1rem;
+  padding: 0.2rem 0;
 }

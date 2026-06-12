@@ -1,72 +1,71 @@
-<section class="pagina pagina-formulario">
-  <div class="cabecalho-pagina">
-    <div>
-      <h1>Nova Solicitação</h1>
-      <p class="subtitulo">Informe os dados da ocorrência para acionar a equipe responsável.</p>
-    </div>
-  </div>
+<section class="tela-nova-solicitacao">
+  <h1 class="titulo-nova"><span class="sinal-mais" aria-hidden="true">+</span>Nova Solicitação</h1>
 
   @if (mensagemSucesso) {
-  <div class="alerta-sucesso">
-    {{ mensagemSucesso }}
-    <a routerLink="/" class="link-sucesso">Voltar ao dashboard</a>
-  </div>
+    <div class="alerta-sucesso">
+      {{ mensagemSucesso }}
+      <a routerLink="/" class="link-sucesso">Voltar ao dashboard</a>
+    </div>
   }
   @if (mensagemErro) {
-  <div class="alerta-erro">{{ mensagemErro }}</div>
+    <div class="alerta-erro">{{ mensagemErro }}</div>
   }
 
-  <form class="cartao" [formGroup]="formulario" (ngSubmit)="enviar()">
+  <form class="formulario-mobile" [formGroup]="formulario" (ngSubmit)="enviar()">
     <div class="campo" [class.invalido]="campoInvalido('nomeSolicitante')">
-      <label for="nomeSolicitante">Nome do solicitante</label>
-      <input id="nomeSolicitante" type="text" formControlName="nomeSolicitante" placeholder="Digite seu nome completo">
+      <label for="nomeSolicitante">Nome</label>
+      <input id="nomeSolicitante" type="text" formControlName="nomeSolicitante"
+        placeholder="Digite seu nome completo">
       @if (campoInvalido('nomeSolicitante')) {
-      <small class="erro">Informe um nome com pelo menos 3 caracteres.</small>
+        <small class="erro">Informe um nome com pelo menos 3 caracteres.</small>
       }
-      <button type="button" class="botao-link" (click)="usarNomeDoPerfil()">
-        Usar dados do perfil
-      </button>
-    </div>
-
-    <div class="linha-dupla">
-      <div class="campo">
-        <label for="rg">RG (do perfil)</label>
-        <input id="rg" type="text" [value]="perfil.rg" readonly>
-      </div>
-      <div class="campo">
-        <label for="cpf">CPF (do perfil)</label>
-        <input id="cpf" type="text" [value]="perfil.cpf" readonly>
-      </div>
     </div>
 
     <div class="campo" [class.invalido]="campoInvalido('endereco')">
       <label for="endereco">Local da ocorrência</label>
-      <input id="endereco" type="text" formControlName="endereco"
-        placeholder="Rua, número e bairro (ex.: Av. Brasil, 1200 - Zona 01)">
+      <div class="campo-com-icone">
+        <input id="endereco" type="text" formControlName="endereco"
+          placeholder="Rua, número e bairro">
+        <span class="icone-campo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+        </span>
+      </div>
       @if (campoInvalido('endereco')) {
-      <small class="erro">Informe o endereço completo da ocorrência.</small>
+        <small class="erro">Informe o endereço completo da ocorrência.</small>
       }
     </div>
 
     <div class="campo" [class.invalido]="campoInvalido('categoria')">
-      <label for="categoria">Categoria do incidente</label>
-      <select id="categoria" formControlName="categoria">
-        <option value="" disabled>Selecione uma categoria</option>
-        @for (categoria of categorias; track categoria) {
-        <option [value]="categoria">{{ rotulosCategoria[categoria] }}</option>
-        }
-      </select>
+      <label for="categoria">Categoria</label>
+      <div class="campo-com-icone">
+        <select id="categoria" formControlName="categoria">
+          <option value="" disabled>Selecione uma categoria</option>
+          @for (categoria of categorias; track categoria) {
+            <option [value]="categoria">{{ rotulosCategoria[categoria] }}</option>
+          }
+        </select>
+        <span class="icone-campo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </span>
+      </div>
       @if (campoInvalido('categoria')) {
-      <small class="erro">Selecione a categoria do incidente.</small>
+        <small class="erro">Selecione a categoria do incidente.</small>
       }
     </div>
 
-    <div class="campo" [class.invalido]="campoInvalido('descricao')">
-      <label for="descricao">Descrição detalhada</label>
-      <textarea id="descricao" rows="5" formControlName="descricao"
+    <div class="campo campo-descricao" [class.invalido]="campoInvalido('descricao')">
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" rows="7" formControlName="descricao"
         placeholder="Descreva a situação com detalhes (mínimo de 10 caracteres)"></textarea>
       @if (campoInvalido('descricao')) {
-      <small class="erro">Descreva a ocorrência com pelo menos 10 caracteres.</small>
+        <small class="erro">Descreva a ocorrência com pelo menos 10 caracteres.</small>
       }
     </div>
 

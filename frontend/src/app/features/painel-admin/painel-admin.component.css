@@ -1,24 +1,80 @@
-.layout-admin {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 1.25rem;
-  align-items: start;
+.topo-admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
 }
 
-.lista-solicitacoes ul {
+.selo-adm {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+}
+
+.titulo-encaminhamento {
+  text-align: center;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  margin: 0 0 1rem;
+}
+
+.lista-suspensa {
+  background-color: #fff;
+  border: var(--borda-nitida);
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.lista-suspensa summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.65rem 0.9rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lista-suspensa summary::-webkit-details-marker {
+  display: none;
+}
+
+.lista-suspensa summary::after {
+  content: '▾';
+  font-size: 0.9rem;
+  transition: transform 0.15s ease;
+}
+
+.lista-suspensa[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.aviso-lista {
+  margin: 0;
+  padding: 0 0.9rem 0.6rem;
+}
+
+.lista-solicitacoes {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0.5rem 0.5rem;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.lista-solicitacoes .aviso {
+  padding: 0 0.4rem 0.4rem;
 }
 
 .item-solicitacao {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.65rem 0.5rem;
-  border-radius: 8px;
+  gap: 0.6rem;
+  padding: 0.55rem 0.5rem;
+  border-radius: 10px;
   cursor: pointer;
-  border-bottom: 1px solid var(--cor-borda);
   transition: background-color 0.15s ease;
 }
 
@@ -31,7 +87,7 @@
 }
 
 .icone-item {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .resumo-item {
@@ -42,73 +98,56 @@
 }
 
 .resumo-item strong {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .resumo-item small {
   color: var(--cor-texto-suave);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.cabecalho-detalhe {
+.titulo-detalhes {
+  text-align: center;
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.badge-central {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
 }
 
-.cabecalho-detalhe h2 {
-  margin: 0;
+.card-detalhes p {
+  margin: 0.45rem 0;
+  font-size: 0.92rem;
 }
 
-.dados-detalhe {
-  margin: 0 0 1.25rem;
-}
-
-.linha-detalhe {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--cor-borda);
-}
-
-.linha-detalhe dt {
-  font-weight: 600;
-  font-size: 0.82rem;
-  color: var(--cor-texto-suave);
-  white-space: nowrap;
-}
-
-.linha-detalhe dd {
-  margin: 0;
-  font-size: 0.9rem;
-  text-align: right;
-}
-
-.linha-detalhe.descricao {
-  flex-direction: column;
-}
-
-.linha-detalhe.descricao dd {
-  text-align: left;
+.descricao-detalhes {
   line-height: 1.45;
 }
 
+.data-abertura {
+  font-size: 0.78rem;
+  color: var(--cor-texto-suave);
+}
+
 .acoes-admin {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 1.25rem;
 }
 
 .acoes-admin .botao {
-  padding: 0.75rem 0.5rem;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
+  width: 100%;
+  border-radius: 14px;
+  padding: 0.95rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
 }
 
 .aviso-encerrada {
@@ -116,8 +155,7 @@
   text-align: center;
 }
 
-@media (max-width: 860px) {
-  .layout-admin {
-    grid-template-columns: 1fr;
-  }
+.aviso-selecao {
+  text-align: center;
+  padding: 1rem 0;
 }

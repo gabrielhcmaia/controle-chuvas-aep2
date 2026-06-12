@@ -1,38 +1,86 @@
-.pagina-formulario {
-  max-width: 680px;
+.tela-nova-solicitacao {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
-.linha-dupla {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+.titulo-nova {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.5rem;
+  margin: 0 0 1.1rem;
 }
 
-.botao-link {
-  align-self: flex-start;
-  background: none;
-  border: none;
-  padding: 0;
-  color: var(--cor-primaria);
-  font-size: 0.8rem;
-  cursor: pointer;
-  text-decoration: underline;
+.sinal-mais {
+  font-size: 2.1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.formulario-mobile {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.campo-com-icone {
+  position: relative;
+  display: flex;
+}
+
+.campo-com-icone input,
+.campo-com-icone select {
+  padding-right: 3.2rem;
+}
+
+.campo-com-icone select {
+  appearance: none;
+}
+
+.icone-campo {
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--borda-nitida);
+  border-radius: 9px;
+  background-color: #fff;
+  color: var(--cor-texto);
+  pointer-events: none;
+}
+
+.icone-campo svg {
+  width: 17px;
+  height: 17px;
+}
+
+.campo-descricao {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-descricao textarea {
+  flex: 1;
+  min-height: 170px;
+  resize: none;
 }
 
 .botao-enviar {
   width: 100%;
-  padding: 0.7rem;
+  padding: 0.85rem;
   font-size: 1rem;
+  margin-top: 0.25rem;
 }
 
 .link-sucesso {
   margin-left: 0.5rem;
   color: inherit;
   font-weight: 600;
-}
-
-@media (max-width: 600px) {
-  .linha-dupla {
-    grid-template-columns: 1fr;
-  }
 }
